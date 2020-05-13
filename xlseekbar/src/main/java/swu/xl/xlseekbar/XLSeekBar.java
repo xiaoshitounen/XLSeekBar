@@ -57,8 +57,15 @@ public class XLSeekBar extends View {
      * 构造方法 Java代码创建的时候进入
      * @param context
      */
-    public XLSeekBar(Context context) {
+    public XLSeekBar(Context context, int lineSize, int lineStyle, int lineColorBg, int lineColorProgress, int currentProgress ,int maxProgress) {
         super(context);
+
+        this.lineSize = lineSize;
+        this.lineStyle = lineStyle;
+        this.lineColorBg = lineColorBg;
+        this.lineColorProgress = lineColorProgress;
+        this.currentProgress = currentProgress;
+        this.maxProgress = maxProgress;
 
         //初始化操作
         init();
