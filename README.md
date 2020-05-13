@@ -1,43 +1,21 @@
 # XLSeekBar
-自定义的进度条以及滑动条的一体版本。
 
-运行效果如下：
-![](https://github.com/xiaoshitounen/XLSeekBar/blob/master/XlSeekBar.jpg)
-
-使用方式：
-~~~
-allprojects {
-  repositories {
-    ...
-    maven { url 'https://jitpack.io' }
-  }
-}
-~~~
-
-~~~
-dependencies {
-  implementation 'com.github.xiaoshitounen:XLSeekBar:1.0.0'
-}
-~~~
-
-
-# PageController 页面控制器 
-
-详细内容博客地址:[自定义View-PageController](https://fanandjiu.com/%E8%87%AA%E5%AE%9A%E4%B9%89View-PageController/#more)
+详细内容博客地址:[自定义View-XLSeekBar](https://fanandjiu.com/%E8%87%AA%E5%AE%9A%E4%B9%89View-XLSeekBar/#more)
 
 简介：
-
-用于控制页面之间的切换，你可以自定义页面控制点的样式，页面控制点之间动画切换的效果，回调当前页面值。
+自定义的进度条以及滑动条的一体版本。
+不仅可以是进度条还可以是滚动条，不仅可以水平放置，还可以竖直放置。
 
 app模块是使用例子，其运行效果：
+![](https://github.com/xiaoshitounen/XLSeekBar/blob/master/XlSeekBar.jpg)
 
-![](https://github.com/xiaoshitounen/PageController/blob/master/self_view_page_controller.gif)
 
 ### 1. 添加依赖
 
 Step 1. Add the JitPack repository to your build file
 
 Add it in your root build.gradle at the end of repositories:
+
 ~~~
 allprojects {
   repositories {
@@ -48,9 +26,10 @@ allprojects {
 ~~~
 
 Step 2. Add the dependency
+
 ~~~
 dependencies {
-        implementation 'com.github.xiaoshitounen:PageController:1.0.3'
+  implementation 'com.github.xiaoshitounen:XLSeekBar:1.0.1'
 }
 ~~~
 
@@ -65,17 +44,38 @@ dependencies {
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <swu.xl.pagecontroller.PagerController
-        android:id="@+id/page_controller"
-        android:layout_centerInParent="true"
-        android:background="#000000"
+    <swu.xl.xlseekbar.XLSeekBar
+        android:layout_marginTop="30dp"
+        android:background="#999999"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:numberOfPage="5"
-        app:pageResource="@drawable/page_controller_shape"
-        app:pagePadding="30"
-        android:paddingTop="20dp"
-        android:paddingBottom="20dp"
+        android:layout_height="30dp"
+        app:currentProgress="80"
+        app:maxProgress="100"
+        app:lineStyle="PROGRESS"
+        />
+
+    <swu.xl.xlseekbar.XLSeekBar
+        android:id="@+id/seek_bar_hor"
+        android:layout_marginTop="90dp"
+        android:background="#999999"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        app:currentProgress="50"
+        app:maxProgress="100"
+        app:lineStyle="SLIDE"
+        />
+
+    <swu.xl.xlseekbar.XLSeekBar
+        android:id="@+id/seek_bar_ver"
+        android:layout_centerInParent="true"
+        android:background="#999999"
+        android:layout_width="30dp"
+        android:layout_height="300dp"
+        app:currentProgress="50"
+        app:maxProgress="100"
+        app:lineStyle="SLIDE"
+        app:lineColorBg="#ffffff"
+        app:lineColorProgress="@color/colorAccent"
         />
 
 </RelativeLayout>
@@ -83,99 +83,36 @@ dependencies {
 
 #### ① 属性
 
-- numberOfPage：设置有多少个页面
-- pagePadding：设置每个页面之间的间距
-- pageResource：设置页面选中以及没有选中的样式
+- lineSize：线条的宽度
+- lineColorBg：线条的背景颜色
+- lineColorProgress：线条的进度颜色
+- lineStyle：线条的样式，PROGRESS是进度条，SLIDE是滑动条
+- currentProgress：当前的进度
+- maxProgress：总的进度
 
-#### ② 页面样式
-
-页面样式是一个xml文件，你可以自己定义你想要的样式。
-
-例子：
-~~~
-<?xml version="1.0" encoding="utf-8"?>
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
-
-    <!--enable:false的情况-->
-    <item android:state_enabled="false">
-        <shape android:shape="oval">
-            <!--大小-->
-            <size android:width="40dp"
-                android:height="40dp"
-                />
-
-            <!--颜色-->
-            <solid android:color="#ff0000"/>
-        </shape>
-    </item>
-
-    <!--enable:true的情况，也是默认的情况-->
-    <item android:state_enabled="true">
-        <shape android:shape="oval">
-            <!--大小-->
-            <size android:width="40dp"
-                android:height="40dp"
-                />
-
-            <!--颜色-->
-            <solid android:color="#666666"/>
-        </shape>
-    </item>
-</selector>
-~~~
-
-#### ③ 页面之间动画切换
-
-在Java代码里面创建动画切换类，并实现动画切换的方法。
-你可以对上一个页面和当前页面控制点进行动画。
-
-~~~
-//初始化
-PagerController pagerController = findViewById(R.id.page_controller);
-
-//设置动画
-pagerController.setPageChangeAnimation(new PagerController.PageChangeAnimation() {
-    @Override
-    public void changeAnimation(View last_dot, View current_dot) {
-        
-    }
-});
-~~~
-
-例子：
-
-~~~
-//初始化
-PagerController pagerController = findViewById(R.id.page_controller);
-
-//设置动画
-pagerController.setPageChangeAnimation(new PagerController.PageChangeAnimation() {
-    @Override
-    public void changeAnimation(View last_dot, View current_dot) {
-        //上一个点不做动画
-
-        //针对当前点的动画
-        ObjectAnimator scale = ObjectAnimator.ofFloat(current_dot, "scaleX", 1.0f, 1.2f, 1.0f);
-        scale.setDuration(500);
-        scale.start();
-    }
-});
-~~~
-
-#### 4.回调当前页面
+#### 4. 滑动条回调进度
 
 回调的`currentPage`是页面的索引值而不是序列值。
 
 ~~~
-//监听页面切换
-pagerController.setPageChangeListener(new PagerController.PageChangeListener() {
+MySeekBar mySeekBarHor = findViewById(R.id.seek_bar_hor);
+MySeekBar mySeekBarVer = findViewById(R.id.seek_bar_ver);
+
+mySeekBarHor.setProgressChangeListener(new MySeekBar.OnProgressChangeListener() {
     @Override
-    public void pageHasChange(int currentPage) {
-        System.out.println("当前页面："+(currentPage+1));
+    public void progressChanged(float progress) {
+        Toast.makeText(MainActivity.this, "横向滑动条的进度:"+progress, Toast.LENGTH_SHORT).show();
+    }
+});
+
+mySeekBarVer.setProgressChangeListener(new MySeekBar.OnProgressChangeListener() {
+    @Override
+    public void progressChanged(float progress) {
+        Toast.makeText(MainActivity.this, "竖向滑动条的进度:"+progress, Toast.LENGTH_SHORT).show();
     }
 });
 ~~~
 
 ### 3. Java代码中动态添加
 
-需要注意一个地方，注意调用各个set方法的顺序，注意setNumberOfPage的位置。
+注意Java代码创建在构造方法中需要传入预设置的值。
