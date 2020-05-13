@@ -35,7 +35,7 @@ dependencies {
 
 ### 2. Xml文件中静态添加使用
 
-~~~
+~~~xml
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -94,7 +94,7 @@ dependencies {
 
 回调的`currentPage`是页面的索引值而不是序列值。
 
-~~~
+~~~java
 MySeekBar mySeekBarHor = findViewById(R.id.seek_bar_hor);
 MySeekBar mySeekBarVer = findViewById(R.id.seek_bar_ver);
 
