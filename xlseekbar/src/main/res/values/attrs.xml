@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="MySeekBar">
+        <!--线条的宽度-->
+        <attr name="lineSize" format="integer"/>
+        <!--背景线条的颜色-->
+        <attr name="lineColorBg" format="color"/>
+        <!--进度线条的颜色-->
+        <attr name="lineColorProgress" format="color"/>
+        <!--进度的样式-->
+        <attr name="lineStyle" format="enum">
+            <enum name="PROGRESS" value="0"/>
+            <enum name="SLIDE" value="1"/>
+        </attr>
+        <!--当前的进度-->
+        <attr name="currentProgress" format="integer"/>
+        <!--最大的进度-->
+        <attr name="maxProgress" format="integer"/>
+    </declare-styleable>
+
+</resources>
