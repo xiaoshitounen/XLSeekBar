@@ -90,7 +90,7 @@ dependencies {
 - currentProgress：当前的进度
 - maxProgress：总的进度
 
-#### 4. 滑动条回调进度
+#### ② 滑动条回调进度
 
 回调的`currentPage`是页面的索引值而不是序列值。
 
