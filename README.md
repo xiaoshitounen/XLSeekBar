@@ -7,7 +7,7 @@
 不仅可以是进度条还可以是滚动条，不仅可以水平放置，还可以竖直放置。
 
 app模块是使用例子，其运行效果：
-![](https://github.com/xiaoshitounen/XLSeekBar/blob/master/XlSeekBar.jpg)
+<img src="https://android-1300729795.cos.ap-chengdu.myqcloud.com/project/Self_View/XLSeekBar/XlSeekBar.jpg" style="zoom:67%;" />
 
 
 ### 1. 添加依赖
