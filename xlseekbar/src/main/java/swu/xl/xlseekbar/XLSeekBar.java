@@ -225,7 +225,7 @@ public class XLSeekBar extends View {
         if (getWidth() > getHeight()){
             position = currentProgress * getWidth() / maxProgress;
         }else {
-            position = currentProgress *getHeight() / maxProgress;
+            position = getHeight() - (currentProgress * getHeight() / maxProgress);
         }
     }
 
