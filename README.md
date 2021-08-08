@@ -1,6 +1,6 @@
 # XLSeekBar
 
-详细内容博客地址:[自定义View-XLSeekBar](https://fanandjiu.com/%E8%87%AA%E5%AE%9A%E4%B9%89View-XLSeekBar/#more)
+详细内容博客地址:[自定义View-XLSeekBar](http://www.fanandjiu.com/article/6d559476.html)
 
 简介：
 自定义的进度条以及滑动条的一体版本。
